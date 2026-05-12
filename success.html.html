@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Предложение отправлено - Tarkov Community</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="success-page">
+    <div class="success-container">
+        <div class="terminal-style">
+            <div class="terminal-line">> СИСТЕМНОЕ СООБЩЕНИЕ</div>
+            <div class="terminal-line">> ПРОТОКОЛ "ПРЕДЛОЖЕНИЕ" ВЫПОЛНЕН</div>
+            <div class="terminal-line blinking">> ДАННЫЕ УСПЕШНО ОТПРАВЛЕНЫ</div>
+        </div>
+        
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <h1>ПРЕДЛОЖЕНИЕ ОТПРАВЛЕНО!</h1>
+        
+        <p class="success-message">
+            Ваше предложение оружия успешно получено. 
+            Мы рассмотрим его и свяжемся с вами, если оно будет принято к обсуждению.
+        </p>
+        
+        <div class="success-stats">
+            <div class="stat">
+                <span class="stat-number" id="waitingTime">3</span>
+                <span class="stat-label">ДНЯ НА РАССМОТРЕНИЕ</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" id="communityVotes">0</span>
+                <span class="stat-label">ГОЛОСОВ СООБЩЕСТВА</span>
+            </div>
+        </div>
+        
+        <div class="success-actions">
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-home"></i> НА ГЛАВНУЮ
+            </a>
+            <a href="index.html#weaponProposals" class="btn btn-secondary">
+                <i class="fas fa-lightbulb"></i> ЕЩЁ ПРЕДЛОЖЕНИЕ
+            </a>
+        </div>
+        
+        <div class="success-note">
+            <i class="fas fa-info-circle"></i>
+            <span>Проверьте папку "Спам", если не получили подтверждение</span>
+        </div>
+        
+        <div class="countdown">
+            <p>Автоматический переход на главную через: <span id="countdown">10</span> сек.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимация счетчика голосов
+            const votesElement = document.getElementById('communityVotes');
+            if (votesElement) {
+                let votes = 0;
+                const target = Math.floor(Math.random() * 50) + 10;
+                const timer = setInterval(() => {
+                    votes++;
+                    votesElement.textContent = votes;
+                    if (votes >= target) clearInterval(timer);
+                }, 50);
+            }
+            
+            // Обратный отсчет
+            let seconds = 10;
+            const countdownElement = document.getElementById('countdown');
+            const countdownTimer = setInterval(() => {
+                seconds--;
+                if (countdownElement) {
+                    countdownElement.textContent = seconds;
+                }
+                if (seconds <= 0) {
+                    clearInterval(countdownTimer);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+            
+            // Отмена редиректа при клике
+            document.querySelectorAll('a, button').forEach(element => {
+                element.addEventListener('click', () => {
+                    clearInterval(countdownTimer);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

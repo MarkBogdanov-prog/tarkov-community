@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarkov Community - Fan Site</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- GIF-шапка -->
+    <header class="video-header" id="main-header">
+        <div class="video-overlay"></div>
+        
+        <!-- GIF-фон -->
+        <img src="video/tarkov-background.gif" alt="Escape from Tarkov Background" class="header-gif" id="headerGif">
+        
+        <!-- Запасной контент -->
+        <div class="video-fallback">
+            <div class="fallback-image"></div>
+        </div>
+        
+        <!-- Контент поверх GIF -->
+        <div class="header-content">
+            <div class="terminal-style">
+                <div class="terminal-line">> СИСТЕМА ЗАГРУЖЕНА</div>
+                <div class="terminal-line blinking">> ДОБРО ПОЖАЛОВАТЬ В ТАРКОВ</div>
+            </div>
+            
+            <h1 class="main-title">
+                <span class="title-part">ESCAPE</span>
+                <span class="title-part">FROM</span>
+                <span class="title-part highlight">TARKOV</span>
+            </h1>
+            
+            <p class="subtitle">ФАН-СООБЩЕСТВО. ПРЕДЛОЖИ ИДЕЮ. ИЗМЕНИ ИГРУ.</p>
+            
+            <div class="header-buttons">
+                <button class="btn btn-primary" id="proposeBtn">
+                    <i class="fas fa-crosshairs"></i> Предложить оружие
+                </button>
+                <a href="https://www.escapefromtarkov.com/" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-globe"></i> Официальный сайт
+                </a>
+                <a href="https://store.steampowered.com/app/3932890/Escape_from_Tarkov/" target="_blank" class="btn btn-steam">
+                    <i class="fab fa-steam"></i> Steam версия
+                </a>
+            </div>
+            
+            <div class="raid-stats">
+                <div class="stat">
+                    <span class="stat-number" id="survivorsCount">0</span>
+                    <span class="stat-label">ВЫЖИВШИХ СЕГОДНЯ</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="ideasCount">0</span>
+                    <span class="stat-label">ИДЕЙ ПРЕДЛОЖЕНО</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кнопка паузы видео (скрыта для GIF) -->
+        <button class="video-control" id="videoControl" style="display: none;" aria-label="Пауза/воспроизведение видео">
+            <i class="fas fa-pause" id="videoIcon"></i>
+        </button>
+    </header>
+
+    <!-- Основная навигация -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <!-- Логотип с вашим фото -->
+            <div class="nav-logo">
+                <img src="images/tarkov-community-logo.png" alt="Tarkov Community Logo" class="logo-icon">
+                <span class="logo-text">TARKOV<span class="logo-highlight">COMMUNITY</span></span>
+            </div>
+            
+            <!-- Десктопное меню -->
+            <ul class="nav-menu">
+                <li><a href="#home"><i class="fas fa-home"></i> ГЛАВНАЯ</a></li>
+                <li><a href="#proposals"><i class="fas fa-lightbulb"></i> ПРЕДЛОЖЕНИЯ</a></li>
+                <li><a href="https://www.escapefromtarkov.com/" target="_blank"><i class="fas fa-external-link-alt"></i> ОФИЦИАЛЬНЫЙ САЙТ</a></li>
+                <li><a href="https://store.steampowered.com/app/3932890/Escape_from_Tarkov/" target="_blank"><i class="fab fa-steam"></i> STEAM</a></li>
+            </ul>
+            
+            <!-- Мобильное меню (гамбургер) -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </button>
+        </div>
+        
+        <!-- Мобильное меню (скрытое) -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <span>МЕНЮ</span>
+                <button class="mobile-close" id="mobileClose" aria-label="Закрыть меню">&times;</button>
+            </div>
+            <ul class="mobile-nav">
+                <li><a href="#home"><i class="fas fa-home"></i> ГЛАВНАЯ</a></li>
+                <li><a href="#proposals"><i class="fas fa-lightbulb"></i> ПРЕДЛОЖЕНИЯ</a></li>
+                <li><a href="https://www.escapefromtarkov.com/" target="_blank"><i class="fas fa-external-link-alt"></i> ОФИЦИАЛЬНЫЙ САЙТ</a></li>
+                <li><a href="https://store.steampowered.com/app/3932890/Escape_from_Tarkov/" target="_blank"><i class="fab fa-steam"></i> STEAM ВЕРСИЯ</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Затемнение для мобильного меню -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Основной контент -->
+    <main id="main-content">
+        <!-- Секция предложения нового оружия -->
+        <section class="weapon-proposal-section" id="proposals">
+            <div class="section-header">
+                <div class="terminal-style small">
+                    <div class="terminal-line">> ЗАПУСК ПРОТОКОЛА "НОВОЕ ВООРУЖЕНИЕ"</div>
+                    <div class="terminal-line">> ДОСТУП К БАЗЕ ДАННЫХ: ОТКРЫТ</div>
+                </div>
+                <h2 class="section-title">ПРЕДЛОЖИТЬ НОВОЕ ОРУЖИЕ</h2>
+                <p class="section-subtitle">Ваши идеи могут появиться в игре. Предложите оружие, которого нет в Таркове.</p>
+            </div>
+            
+            <!-- Форма предложения нового оружия -->
+            <div class="proposal-form-container">
+                <div class="form-header">
+                    <h3><i class="fas fa-edit"></i> ФОРМА ПРЕДЛОЖЕНИЯ</h3>
+                    <p class="form-subtitle">Заполните детали вашего предложения</p>
+                </div>
+                
+                <!-- ФОРМА С АКТИВАЦИОННЫМ КОДОМ -->
+                <form id="weaponProposalForm" class="proposal-form" 
+                      action="https://formsubmit.co/cc924190323f64071d3d73d9f5bf1d3c6" 
+                      method="POST">
+                    
+                    <!-- ОБЯЗАТЕЛЬНЫЕ НАСТРОЙКИ FORMSUBMIT -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="Новое предложение оружия для Escape from Tarkov">
+                    <input type="hidden" name="_template" value="table">
+                    <!-- После отправки перенаправляем на страницу успеха -->
+                    <input type="hidden" name="_next" value="success.html">
+                    <!-- Автоматический ответ пользователю -->
+                    <input type="hidden" name="_autoresponse" value="Спасибо за ваше предложение оружия для Escape from Tarkov! Мы получили вашу заявку и рассмотрим её в течение 3 рабочих дней.">
+                    <!-- Защита от спама -->
+                    <input type="text" name="_honey" style="display:none">
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="weaponName"><i class="fas fa-crosshairs"></i> Название оружия *</label>
+                            <input type="text" id="weaponName" name="Название оружия" required 
+                                   placeholder="Например: HK 433">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="weaponType"><i class="fas fa-filter"></i> Тип оружия *</label>
+                            <select id="weaponType" name="Тип оружия" required>
+                                <option value="">Выберите тип</option>
+                                <option value="Штурмовая винтовка">Штурмовая винтовка</option>
+                                <option value="Пистолет-пулемёт">Пистолет-пулемёт</option>
+                                <option value="Снайперская винтовка">Снайперская винтовка</option>
+                                <option value="Дробовик">Дробовик</option>
+                                <option value="Пистолет">Пистолет</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="weaponCaliber"><i class="fas fa-bullseye"></i> Калибр *</label>
+                            <input type="text" id="weaponCaliber" name="Калибр" required 
+                                   placeholder="Например: 5.56×45mm NATO">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="weaponCountry"><i class="fas fa-flag"></i> Страна производства</label>
+                            <input type="text" id="weaponCountry" name="Страна производства" 
+                                   placeholder="Например: Германия">
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="weaponDescription"><i class="fas fa-file-alt"></i> Подробное описание *</label>
+                            <textarea id="weaponDescription" name="Подробное описание" rows="5" required 
+                                      placeholder="Опишите особенности оружия, его тактические преимущества, историю создания..."></textarea>
+                            <div class="char-count">
+                                <span id="charCount">0</span> / 500 символов
+                            </div>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="weaponReason"><i class="fas fa-lightbulb"></i> Почему это оружие нужно в Таркове? *</label>
+                            <textarea id="weaponReason" name="Почему это оружие нужно в Таркове" rows="3" required 
+                                      placeholder="Объясните, как это оружие дополнит игровой процесс..."></textarea>
+                        </div>
+                        
+                        <!-- Поле для email пользователя -->
+                        <div class="form-group">
+                            <label for="userEmail"><i class="fas fa-envelope"></i> Ваш Email *</label>
+                            <input type="email" id="userEmail" name="Email отправителя" required
+                                   placeholder="example@gmail.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="userNickname"><i class="fas fa-user"></i> Ваш ник в игре</label>
+                            <input type="text" id="userNickname" name="Игровой ник" 
+                                   placeholder="Например: Bear_Operator">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <div class="form-check">
+                            <input type="checkbox" id="agreeTerms" name="Согласие на обработку данных" required>
+                            <label for="agreeTerms">Я согласен с обработкой моих данных</label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submitProposal">
+                            <span class="btn-text">ОТПРАВИТЬ ПРЕДЛОЖЕНИЕ</span>
+                            <span class="btn-loader">
+                                <div class="bullet-animation">
+                                    <div class="bullet"></div>
+                                    <div class="bullet"></div>
+                                    <div class="bullet"></div>
+                                </div>
+                                ОТПРАВКА...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Результат отправки -->
+                <div id="formResult" class="form-result"></div>
+            </div>
+        </section>
+        
+        <!-- Секция ссылок -->
+        <section class="links-section">
+            <div class="section-header">
+                <h2 class="section-title">ОФИЦИАЛЬНЫЕ РЕСУРСЫ</h2>
+                <p class="section-subtitle">Полезные ссылки для фанатов Escape from Tarkov</p>
+            </div>
+            
+            <div class="links-grid">
+                <a href="https://www.escapefromtarkov.com/" target="_blank" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>ОФИЦИАЛЬНЫЙ САЙТ</h3>
+                    <p>Новости, обновления, официальная информация от разработчиков</p>
+                </a>
+                
+                <a href="https://store.steampowered.com/app/3932890/Escape_from_Tarkov/" target="_blank" class="link-card">
+                    <div class="link-icon">
+                        <i class="fab fa-steam"></i>
+                    </div>
+                    <h3>STEAM ВЕРСИЯ</h3>
+                    <p>Купить игру в Steam, читать отзывы, следить за обновлениями</p>
+                </a>
+                
+                <a href="https://www.escapefromtarkov.com/support" target="_blank" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>ТЕХПОДДЕРЖКА</h3>
+                    <p>Помощь с игрой, баг-репорты, вопросы по аккаунту</p>
+                </a>
+                
+                <a href="https://forum.escapefromtarkov.com/" target="_blank" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>ОФИЦИАЛЬНЫЙ ФОРУМ</h3>
+                    <p>Общение с сообществом, обсуждение игры, вопросы</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4 class="footer-title">TARKOV COMMUNITY</h4>
+                <p class="footer-desc">Фанатский проект для улучшения Escape from Tarkov через идеи сообщества.</p>
+                <div class="footer-social">
+                    <a href="https://www.escapefromtarkov.com/" target="_blank" class="social-link" title="Официальный сайт">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a href="https://store.steampowered.com/app/3932890/Escape_from_Tarkov/" target="_blank" class="social-link" title="Steam">
+                        <i class="fab fa-steam"></i>
+                    </a>
+                    <a href="https://www.youtube.com/c/escapefromtarkov" target="_blank" class="social-link" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-title">НАВИГАЦИЯ</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#proposals">Предложить оружие</a></li>
+                    <li><a href="https://www.escapefromtarkov.com/" target="_blank">Официальный сайт</a></li>
+                    <li><a href="https://store.steampowered.com/app/3932890/Escape_from_Tarkov/" target="_blank">Steam версия</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-title">ВАЖНОЕ</h4>
+                <p class="footer-notice">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Это НЕОФИЦИАЛЬНЫЙ фанатский проект. Мы не связаны с Battlestate Games.
+                </p>
+                <p class="footer-notice">
+                    <i class="fas fa-info-circle"></i>
+                    Все права на Escape from Tarkov принадлежат Battlestate Games.
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2024 Tarkov Community Fan Project. Все права на Escape from Tarkov принадлежат Battlestate Games.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
